@@ -1,6 +1,6 @@
 # Idena public shared node setup guide using your own SSL termination
 
-![Screenshot](pm222.jpg)
+![Screenshot](pm222.png)
 
 ## Introduction
 [Idena](https://idena.io) is a Proof-of-Person blockchain. I'm assuming you are familiar with it and with the identity validation process, and have some practical linux command line experience as some of the commands listed in this guide will require modifications before execution. 
