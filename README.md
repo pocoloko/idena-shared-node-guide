@@ -1,7 +1,7 @@
 # Idena public shared node setup guide using your own SSL termination
 
 ## Introduction
-[Idena](https://idena.io) is a Proof-of-Person blockchain. I'm assuming you are familiar with it and with the identity validation process, and have some practical linux command line experience as some of the commands listed will require modifications before execution. 
+[Idena](https://idena.io) is a Proof-of-Person blockchain. I'm assuming you are familiar with it and with the identity validation process, and have some practical linux command line experience as some of the commands listed in this guide will require modifications before execution. 
 In idena, some decide to run a public shared node for their friends and family. Also, if you don't want to run your own idena node or can't due to your internet connection being bad, you can perform validation using public rented nodes for a small iDNA fee. [The idena web app](https://app.idena.io/) used to perform validation requires connecting to public nodes with HTTPS, however the [idena node proxy](https://github.com/idena-network/idena-node-proxy) which is used to open up nodes to many different identities does not support HTTPS. At the time of writing, all public rental nodes available for validation rely on [Cloudflare](https://cloudflare.com) for SSL termination, thus centralizing what is supposed to be decentralized, the node itself in the background is still decentralized of course, but the humans connecting to validate their identities are connecting to a centralized endpoint, albeit with some geographic distribution. Also, the data between cloudflare and the actual node proxy is not even encrypted, only the connection between the human and Cloudflare is, which is bad. The official idena public nodes used for validating candidates seem to be using nginx proxying for SSL termination. I've decided to use HAProxy as a simpler and more lightweight solution since I don't need a full-blown web server and resources on a VPS are tight.
 
 This guide is for setting up your own public shared node with your own domain and a [Let's Encrypt](https://letsencrypt.org/) SSL certificate on a VPS, but **without** relying on cloudflare for SSL termination. As a starting guide, I have used some of the already existing guides such as Rioda's [Shared node setup on VPS](https://idena.site/faq.php#shared-node-setup-on-vps) and Mahmoud's original guide from the now defunct idena forum, [Running your own shared node step by step tutorial](https://discuss.idena.site/d/36-running-your-own-shared-node-step-by-step-tutorial), but I've done quite a few things differently.
@@ -13,7 +13,7 @@ The general idea here is: idena web client -> HAProxy HTTPS -> idena-node-proxy 
 
 These instructions are for Debian 10, other distros have not been tested. I'm using Debian 10 on a VPS with 4 vCores, 8GB RAM and 100GB SSD storage. 
 
-* Most VPSs don't come with swap enabled, but I created a 4GB swapfile which will act as RAM fallback in case I ever run out of the available 8GB, this will prevent the system from killing processes, of course things will slow down but its better to have additional "RAM" even if its at SSD speeds than to have killed processes.
+* (optional) Most VPSs don't come with swap enabled, but I created 4GB swapfile which will act as RAM fallback in case I ever run out of the available 8GB, this will prevent the system from killing processes, of course things will slow down but its better to have additional "RAM" even if its at SSD speeds than to have killed processes.
 ```
 sudo fallocate -l 4G /swapfile
 sudo chmod 600 /swapfile
@@ -29,13 +29,13 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
 * Install pm2, a daemon process manager: `sudo npm i -g pm2`
 
-* Create a separate user for the idena node: `sudo useradd -m -s /bin/bash -G sudo idena`. You can now ssh to your VPS as this user or use 'sudo su - idena' to switch to it from your current user, do this preferably inside a screen session so you can use both your original VPS username and the idena one in separate screen windows.
+* (optional) Create a separate user for the idena node: `sudo useradd -m -s /bin/bash -G sudo idena`. You can now ssh to your VPS as this user or use 'sudo su - idena' to switch to it from your current user, do this preferably inside a screen session so you can use both your original VPS username and the idena one in separate screen windows.
 
 ---
 
 ## Step 2: install idena-go, the idena node
 
-1. When youre at the shell prompt for the user that you wish to install the node on, do the following, modifying the version of the node to whatever the current version is.
+1. When youre at the shell prompt for the user that you wish to install [the node](https://github.com/idena-network/idena-go/releases) on, do the following, modifying the version of the node to whatever the current version is.
 
 ```
 cd ~
@@ -108,7 +108,7 @@ After editing everything, while still in the idena-node-proxy directory, run:
 
 ```
 npm install
---I got a message here that there is a high severity vulnerability and to run 'npm audit fix' and so I did
+(I got a message here that there is a high severity vulnerability and to run 'npm audit fix' and so I did)
 npm start
 ```
 
@@ -163,7 +163,7 @@ to reload the configuration run ``sudo systemctl reload haproxy``
 
 to view HAProxy status do ``haproxy -vv``
 
-For the most part I used this guide to figure things out [HAProxy SSL Termination](https://www.haproxy.com/blog/haproxy-ssl-termination/)
+For the most part I used this guide to figure things out: [HAProxy SSL Termination](https://www.haproxy.com/blog/haproxy-ssl-termination/)
 
 ---
 
@@ -188,7 +188,7 @@ I have only done one validation so far, I provided 120 keys so 120 humans could 
 
 From watching the resource usage while validation was ongoing (after finishing my own validation of course), idena-go node is definitely the most resource hungry, on the other hand HAProxy and idena-node-proxy don't use any significant resources at all.
 
-It is recommended to restart the node often as it tends to hog up RAM, so I would set up a cron job under the user where the node is installed to run `pm2 restart idena-go` at a convenient time every 24hrs.
+It is recommended to restart the node often as it tends to hog up RAM, so I would set up a cron job under the user where the node is installed to run `pm2 restart idena-go` at a convenient time every 24hrs or so.
 
 ---
 
@@ -221,7 +221,7 @@ sed s/$/,71/ keys.txt > keysdevs.txt
 
 ## Bonus 4: monitoring your node remotely
 
-I wrote a little Python script to watch my node and send me an e-mail if its down. Check it out here
+I wrote a little Python script to watch my node and send me an e-mail if its down. Check it out: [remote monitor for idena public shared node](https://github.com/pocoloko/idena-shared-node-monitor)
 
 ---
 Found this guide useful? I accept iDNA donations to address `0x8dc26a6fbdbe2fdb8b5284ab55f56e720b3c42ad`
