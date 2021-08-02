@@ -196,9 +196,9 @@ It is recommended to restart the node often as it tends to hog up RAM, so I woul
 
 ## Bonus 3: creating lists of api keys for rental nodes
 
-If you're going to run a public rental node and not just a small shared node for friends and family, you need to create a lot of api keys for each separate validation, then you need to configure these api keys in your idena-node-proxy configuration file, and then send them to the admins of idena for your node to show up on the rental page in the idena web app. 
+If you're going to run a public rental node and not just a small shared node for friends and family, you need to create a lot of api keys for each separate validation, then you need to configure these api keys in your idena-node-proxy configuration file, and then send them to the admins of idena for your node to show up on the rental page in the idena web app. We are going to use the same linux command to create the apikeys as in Step 2 to create the node api key.
 
-I've created a shell script that generates the api keys for you, it is available [here](https://github.com/pocoloko/idena-shared-node/blob/main/apikeys.sh) but read on if you want to understand how it works:
+I wrote a simple shell script that generates the api keys for you, it is available [here](https://github.com/pocoloko/idena-shared-node/blob/main/apikeys.sh) but read on if you want to understand how it works:
 
 1. To create API keys, change 150 to the number of API keys you want to create:
 ```
@@ -223,7 +223,7 @@ sed s/$/,71/ keys.txt > keysdevs.txt
 
 ## Bonus 4: monitoring your node remotely
 
-I wrote a little Python script to watch my node and send me an e-mail if its down. Check it out: [remote monitor for idena public shared node](https://github.com/pocoloko/idena-shared-node-monitor)
+A Python script to watch the node and send an e-mail if its down. Check it out: [remote monitor for idena public shared node](https://github.com/pocoloko/idena-shared-node-monitor)
 
 ---
 Found this guide useful? I accept iDNA donations to address `0x8dc26a6fbdbe2fdb8b5284ab55f56e720b3c42ad`
