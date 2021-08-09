@@ -176,6 +176,7 @@ The quick and dirty:
 - go to the idena-node folder
 - wget the newest version
 - rm the idena-go symlink
+- give execute permissions to the newly downloaded node: chmod u+x idena-node-linux-0.26.6
 - add a symlink to the new version: ln -s idena-node-linux-0.26.6 idena-go
 - run pm2 restart idena-node
 - keep the old version in case you need to revert to it, or delete it
