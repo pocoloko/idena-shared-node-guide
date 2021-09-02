@@ -126,8 +126,10 @@ to check status of services running under pm2: pm2 status
 to live-monitor services running under pm2: pm2 monit
 to restart the proxy: pm2 restart idena-node-proxy
 to restart the node: pm2 restart idena-go
-to shut down the proxy: pm2 delete idena-node-proxy
-to start the proxy: pm2 start idena-node-proxy
+to shut down the node completely: pm2 delete idena-go
+to start the node again: pm2 start idena-go -- --config=config.json (must be in idena-go directory)
+to shut down the proxy completely: pm2 delete idena-node-proxy
+to start the proxy: npm start (must be in idena-node-proxy directory)
 ```
 
 ---
