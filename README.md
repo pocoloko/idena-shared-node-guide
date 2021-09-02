@@ -61,7 +61,7 @@ to start your node using pm2:
 
 ```
 cd ~/idena-node
-pm2 start idena-go -- --config=config.json
+pm2 start idena-go --config=config.json
 ```
 
 now our node is running in the background, you can follow its output by using ```tail -f ~/idena-node/datadir/logs/output.log``` or `pm2 monit`
@@ -127,7 +127,7 @@ to live-monitor services running under pm2: pm2 monit
 to restart the proxy: pm2 restart idena-node-proxy
 to restart the node: pm2 restart idena-go
 to shut down the node completely: pm2 delete idena-go
-to start the node again: pm2 start idena-go -- --config=config.json (must be in idena-go directory)
+to start the node again: pm2 start idena-go --config=config.json (must be in idena-go directory)
 to shut down the proxy completely: pm2 delete idena-node-proxy
 to start the proxy: npm start (must be in idena-node-proxy directory)
 ```
