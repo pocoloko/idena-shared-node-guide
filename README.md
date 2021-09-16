@@ -43,9 +43,9 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 cd ~
 mkdir idena-node && cd idena-node
 wget the newest node from https://github.com/idena-network/idena-go/releases
-ln -s idena-node-linux-0.26.6 idena-go
-chmod u+x idena-node-linux-0.26.6
-echo "{\"IpfsConf\":{\"Profile\": \"server\" ,\"FlipPinThreshold\":1},\"Sync\": {\"LoadAllFlips\": true}}" > config.json
+ln -s idena-node-linux-0.27.0 idena-go
+chmod u+x idena-node-linux-0.27.0
+echo "{\"IpfsConf\":{\"Profile\": \"shared\" ,\"FlipPinThreshold\":1},\"Sync\": {\"LoadAllFlips\": true}}" > config.json
 mkdir datadir && cd datadir
 mkdir idenachain.db && cd idenachain.db
 wget https://sync.idena.site/idenachain.db.zip (Thanks Rioda!)
@@ -178,8 +178,8 @@ The quick and dirty:
 - go to the idena-node folder
 - wget the newest version
 - rm the idena-go symlink
-- give execute permissions to the newly downloaded node: chmod u+x idena-node-linux-0.26.6
-- add a symlink to the new version: ln -s idena-node-linux-0.26.6 idena-go
+- give execute permissions to the newly downloaded node: chmod u+x idena-node-linux-0.27.0
+- add a symlink to the new version: ln -s idena-node-linux-0.27.0 idena-go
 - run pm2 restart idena-node
 - keep the old version in case you need to revert to it, or delete it
 - you can change the symlink to the version you want to run without having to modify pm2, just run the restart command after changing the symlink and the node version that the symlink is pointing to will run.
