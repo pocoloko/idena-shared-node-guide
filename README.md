@@ -45,7 +45,7 @@ mkdir idena-node && cd idena-node
 wget the newest node from https://github.com/idena-network/idena-go/releases
 ln -s idena-node-linux-0.27.0 idena-go
 chmod u+x idena-node-linux-0.27.0
-echo "{\"IpfsConf\":{\"Profile\": \"shared\" ,\"FlipPinThreshold\":1},\"Sync\": {\"LoadAllFlips\": true}}" > config.json
+echo "{\"IpfsConf\":{\"Profile\": \"server\" ,\"FlipPinThreshold\":1},\"Sync\": {\"LoadAllFlips\": true}}" > config.json
 mkdir datadir && cd datadir
 mkdir idenachain.db && cd idenachain.db
 wget https://sync.idena.site/idenachain.db.zip (Thanks Rioda!)
@@ -61,7 +61,7 @@ to start your node using pm2:
 
 ```
 cd ~/idena-node
-pm2 start idena-go -- --config=config.json
+pm2 start idena-go -- --config=config.json --profile=shared
 ```
 
 now our node is running in the background, you can follow its output by using ```tail -f ~/idena-node/datadir/logs/output.log``` or `pm2 monit`
@@ -183,6 +183,7 @@ The quick and dirty:
 - run pm2 restart idena-node
 - keep the old version in case you need to revert to it, or delete it
 - you can change the symlink to the version you want to run without having to modify pm2, just run the restart command after changing the symlink and the node version that the symlink is pointing to will run.
+- Only if there has been a change in the command line to start the idena node, such as with v0.27.0, you must run pm2 save for pm2 to remember this change for future restarts and for running at boot.
 ```
 
 ---
