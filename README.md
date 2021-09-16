@@ -187,15 +187,16 @@ The quick and dirty:
 
 ---
 
-## Bonus 2: node performance
+## Bonus 2: node performance and node log parsing
 
 For my very first validation, I provided 120 keys so 120 humans could validate. In the end I validated a total of 30 humans, and it appears all of them validated successfuly using my public rental node.
 
 For the 2nd validation, I provided 200 keys and in total I validated 130 humans, I am writing a script to parse log files and create statistics for each validation.
 
-From watching the resource usage while validation was ongoing (after finishing my own validation of course), idena-go node is definitely the most resource hungry, on the other hand HAProxy and idena-node-proxy don't use any significant resources at all. I'm fairly confident I could easily increase my slots to 300 or even 400 on my current VPS.
+From watching the resource usage while validation was ongoing (after finishing my own validation of course), idena-go node is definitely the most resource hungry, on the other hand HAProxy and idena-node-proxy don't use any significant resources at all. I'm fairly confident I could easily increase my slots somewhat on my current VPS.
 
-It is recommended to restart the node often as it tends to hog up RAM, so I would set up a cron job under the user where the node is installed to run `pm2 restart idena-go` at a convenient time every 24hrs or so.
+I've created a log parser to get some useful statistics from your node after a validation, more information at [idena-node-proxy validation log parser](https://github.com/pocoloko/idena-node-proxy-logparser)
+~~It is recommended to restart the node often as it tends to hog up RAM, so I would set up a cron job under the user where the node is installed to run `pm2 restart idena-go` at a convenient time every 24hrs or so.~~ The newer node versions do not hog as much RAM and seem to hover steadily around 4GB usage, but if you wish you can still restart your node every once in a while.
 
 ---
 
