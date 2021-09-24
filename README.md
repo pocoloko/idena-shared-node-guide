@@ -45,7 +45,7 @@ mkdir idena-node && cd idena-node
 wget the newest node from https://github.com/idena-network/idena-go/releases
 ln -s idena-node-linux-0.27.0 idena-go
 chmod u+x idena-node-linux-0.27.0
-echo "{\"IpfsConf\":{\"Profile\": \"server\" ,\"FlipPinThreshold\":1},\"Sync\": {\"LoadAllFlips\": true}}" > config.json
+echo "{\"IpfsConf\":{\"Profile\": \"server\" ,\"FlipPinThreshold\":1}}" > config.json
 mkdir datadir && cd datadir
 mkdir idenachain.db && cd idenachain.db
 wget https://sync.idena.site/idenachain.db.zip (Thanks Rioda!)
@@ -127,7 +127,7 @@ to live-monitor services running under pm2: pm2 monit
 to restart the proxy: pm2 restart idena-node-proxy
 to restart the node: pm2 restart idena-go
 to shut down the node completely: pm2 delete idena-go
-to start the node again: pm2 start idena-go -- --config=config.json (must be in idena-go directory)
+to start the node again: pm2 start idena-go -- --config=config.json (must be in directory where idena-go is located)
 to shut down the proxy completely: pm2 delete idena-node-proxy
 to start the proxy: npm start (must be in idena-node-proxy directory)
 ```
