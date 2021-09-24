@@ -37,12 +37,14 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
 ## Step 2: install idena-go, the idena node
 
-1. When youre at the shell prompt for the user that you wish to install [the node](https://github.com/idena-network/idena-go/releases) on, do the following, modifying the version of the node to whatever the version you downloaded is.
+1. When youre at the shell prompt for the user that you wish to install [the node](https://github.com/idena-network/idena-go/releases) on, do the following:
 
 ```
 cd ~
 mkdir idena-node && cd idena-node
-get the newest linux node by copying the link to it from https://github.com/idena-network/idena-go/releases and using wget
+```
+get the newest linux node by copying the link to it from https://github.com/idena-network/idena-go/releases and using wget. Then edit the following code block to reflect the version that you downloaded before using the commands:
+```
 ln -s idena-node-linux-0.27.0 idena-go
 chmod u+x idena-node-linux-0.27.0
 echo "{\"IpfsConf\":{\"Profile\": \"server\" ,\"FlipPinThreshold\":1}}" > config.json
