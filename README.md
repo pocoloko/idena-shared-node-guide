@@ -118,7 +118,7 @@ npm start
 
 if the idena proxy doesnt start and in the pm2 error logs you see something like "Error: bind EACCES" it means the proxy could not bind to the configured port, something else might be running on that port.
 
-once both the node and proxy are running, run `sudo pm2 startup` to have the pm2 daemon start on boot, then run `pm2 save` to save what is currently running under pm2, which means it will start both the node and the proxy on every boot.
+once both the node and proxy are running, run `pm2 startup` and follow the instructions to have the pm2 daemon start on boot, then run `pm2 save` to save what is currently running under pm2, which means it will start both the node and the proxy on every boot.
 
 **pm2 cheat sheet**:
 
