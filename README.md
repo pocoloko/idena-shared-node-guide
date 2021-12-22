@@ -208,7 +208,9 @@ I've created a log parser to get some useful statistics from your node after a v
 
 If you're going to run a public rental node and not just a small shared node for friends and family, you need to create a lot of api keys for each separate validation, then you need to configure these api keys in your idena-node-proxy configuration file, and then send them to the admins of idena for your node to show up on the rental page in the idena web app. We are going to use the same linux command to create the apikeys as in Step 2 to create the node api key.
 
-I wrote a simple shell script that generates the api keys for you, it is available [here](https://github.com/pocoloko/idena-shared-node/blob/main/apikeys.sh) but read on if you want to understand how it works:
+If you are running a private node and thus don't need to send keys to the developers and you would also like to choose the length of the keys, I have a simple shell script that generates such keys available [here](https://github.com/pocoloko/idena-shared-node/blob/main/apikeys-priv.sh)
+
+If you are running a public rental node I have another shell script that generates the api keys for you for your rental node, including the file to send to developers for inclusion in the marketplace, it is available [here](https://github.com/pocoloko/idena-shared-node/blob/main/apikeys.sh) but read on if you want to understand how it works:
 
 1. To create API keys, change 150 to the number of API keys you want to create:
 ```
